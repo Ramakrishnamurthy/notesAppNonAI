@@ -10,11 +10,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-
-/*@Data
-@Getter
-@Setter
-@Builder*/
+/* 
+ * The Notes model class represents subject , description, created and updated time stamps
+ * This provides functionality about notes retrieval and modification  using getter and setter methods.
+ */
 @Entity
 public class Note {
 

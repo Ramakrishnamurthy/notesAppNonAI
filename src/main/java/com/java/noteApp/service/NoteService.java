@@ -12,4 +12,6 @@ public interface NoteService {
 	Note addNote(Note note);
 	Note getNoteById(Long id);
 	Note modifyNote(Long id,Note note);
+	Long totalWordCountOfSpecificNote(Long id);
+	double averageLengthofAllNote();
 }
