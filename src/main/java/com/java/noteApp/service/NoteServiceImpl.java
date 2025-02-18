@@ -93,11 +93,8 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public double averageLengthofAllNote() {
 		List<Note> listOfNotes=noteRepository.findAll();
-		if(listOfNotes==null) return 0;
-		else {
 			return listOfNotes.stream().mapToInt(note -> note.getDescription().split(" ").length)
-					.average().getAsDouble();
-		}
+					.average().orElse(0.0);
 	}
 
     
