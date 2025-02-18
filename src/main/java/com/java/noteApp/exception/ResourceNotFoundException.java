@@ -1,6 +1,5 @@
 package com.java.noteApp.exception;
 
-
 /*
  * This is ResourceNotFoundException  class extending RuntimeException ,
  * represents a custom exception that is thrown a resource/note is not-found.
@@ -10,16 +9,14 @@ package com.java.noteApp.exception;
  * @since 2025-02-18
  */
 
-public class ResourceNotFoundException extends RuntimeException{
+public class ResourceNotFoundException extends RuntimeException {
 
-	
 	public ResourceNotFoundException() {
 		super("Note Not found ");
 	}
-	
+
 	public ResourceNotFoundException(String message) {
 		super(message);
 	}
 
-	
 }
