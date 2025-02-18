@@ -120,4 +120,24 @@ public class NoteServiceImpl implements NoteService {
 		return noteRepository.findBySubject(subject);
 	}
 
+	@Override
+	public Note likeNoteById(Long id) {
+		Note note=getNoteById(id);
+		note.setLikes(note.getLikes()+1);
+		return noteRepository.save(note);
+	}
+
+	@Override
+	public Note unlikeNoteById(Long id) {
+		Note note=getNoteById(id);
+		note.setLikes(note.getLikes()-1);
+		return noteRepository.save(note);
+		
+	}
+
+	public List<Note> getAllLikedNotes() {
+		List<Note> likedNotes=noteRepository.findAll();
+		return likedNotes.stream().filter(note->note.getLikes()>0).toList();
+	}
+
 }

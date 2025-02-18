@@ -34,6 +34,9 @@ public class Note {
 	@Column(name = "timestampUpdated")
 	private String timestampUpdated;
 
+	@Column(name = "likes")
+	private int likes;
+
 	// private boolean likes;
 	public Note() {
 		super();
@@ -88,10 +91,19 @@ public class Note {
 		this.timestampUpdated = timestampUpdated;
 	}
 
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
 	@Override
 	public String toString() {
 		return "Note [noteId=" + noteId + ", subject=" + subject + ", description=" + description
-				+ ", timestampCreated=" + timestampCreated + ", timestampUpdated=" + timestampUpdated + "]";
+				+ ", timestampCreated=" + timestampCreated + ", timestampUpdated=" + timestampUpdated + ", likes="
+				+ likes + "]";
 	}
 
 }

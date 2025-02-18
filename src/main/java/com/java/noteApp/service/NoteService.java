@@ -21,4 +21,10 @@ public interface NoteService {
 	Long countTotalNotes();
 
 	List<Note> findBySubject(String subject);
+	
+	Note likeNoteById(Long Id);
+	
+    Note unlikeNoteById(Long id);
+    
+    List<Note> getAllLikedNotes();
 }

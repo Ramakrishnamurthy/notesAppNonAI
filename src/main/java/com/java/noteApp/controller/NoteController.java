@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.noteApp.model.Note;
+import com.java.noteApp.repository.NoteRepository;
 import com.java.noteApp.service.NoteService;
 
 /*
@@ -84,4 +85,20 @@ public class NoteController {
 		return noteService.averageLengthofAllNote();
 	}
 
+	@PostMapping("/api/notes/{id}/like")
+	public ResponseEntity<Note> getLikedNoteById(@PathVariable Long id){
+		Note likedNote=noteService.likeNoteById(id);
+		return new ResponseEntity<Note>(likedNote, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/api/notes/{id}/unlike")
+	public ResponseEntity<Note> unlikeNoteById(@PathVariable Long id){
+		Note unlikedNote=noteService.unlikeNoteById(id);
+		return new ResponseEntity<Note>(unlikedNote, HttpStatus.OK);
+	}
+	
+	@GetMapping("/api/notes/like")
+	public List<Note> getListOfLikedNotes() {
+		return noteService.getAllLikedNotes();
+	}
 }
