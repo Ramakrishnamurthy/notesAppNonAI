@@ -85,18 +85,21 @@ public class NoteController {
 		return noteService.averageLengthofAllNote();
 	}
 
+	/* Handler method for get liked notes by Id */
 	@PostMapping("/api/notes/{id}/like")
 	public ResponseEntity<Note> getLikedNoteById(@PathVariable Long id){
 		Note likedNote=noteService.likeNoteById(id);
 		return new ResponseEntity<Note>(likedNote, HttpStatus.OK);
 	}
 	
+	/* Handler method for get unlike notes by Id */
 	@DeleteMapping("/api/notes/{id}/unlike")
 	public ResponseEntity<Note> unlikeNoteById(@PathVariable Long id){
 		Note unlikedNote=noteService.unlikeNoteById(id);
 		return new ResponseEntity<Note>(unlikedNote, HttpStatus.OK);
 	}
 	
+	/* Handler method for get list of liked notes */
 	@GetMapping("/api/notes/like")
 	public List<Note> getListOfLikedNotes() {
 		return noteService.getAllLikedNotes();

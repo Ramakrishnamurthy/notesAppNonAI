@@ -103,6 +103,13 @@ public class NoteServiceImpl implements NoteService {
 		return listOfNotes.stream().mapToInt(note -> note.getDescription().split(" ").length).average().orElse(0.0);
 	}
 
+	/*
+	 * This function delete note by given id
+	 * 
+	 * @param id , Long type
+	 * 
+	 * @return void ,
+	 */
 	@Override
 	public void deleteNote(Long id) {
 		Note fetchedNote = noteRepository.findById(id)
@@ -110,34 +117,65 @@ public class NoteServiceImpl implements NoteService {
 		noteRepository.deleteById(id);
 	}
 
+	/*
+	 * This function return the all the notes present
+	 * 
+	 * @return Long , total no of notes
+	 */
 	@Override
 	public Long countTotalNotes() {
 		return noteRepository.count();
 	}
 
+	/*
+	 * This function return the List of notes with respect to specific subject
+	 * 
+	 * @param String, subject
+	 * 
+	 * @return List , list of notes
+	 */
 	@Override
 	public List<Note> findBySubject(String subject) {
 		return noteRepository.findBySubject(subject);
 	}
 
+	/*
+	 * This function return will like a note with respect to given id
+	 * 
+	 * @param Long, notesId
+	 * 
+	 * @return note, note with incrementing likes
+	 */
 	@Override
 	public Note likeNoteById(Long id) {
-		Note note=getNoteById(id);
-		note.setLikes(note.getLikes()+1);
+		Note note = getNoteById(id);
+		note.setLikes(note.getLikes() + 1);
 		return noteRepository.save(note);
 	}
 
+	/*
+	 * This function return will unlike a note with respect to given id
+	 * 
+	 * @param Long, notesId
+	 * 
+	 * @return note, note with decremented likes
+	 */
 	@Override
 	public Note unlikeNoteById(Long id) {
-		Note note=getNoteById(id);
-		note.setLikes(note.getLikes()-1);
+		Note note = getNoteById(id);
+		note.setLikes(note.getLikes() - 1);
 		return noteRepository.save(note);
-		
+
 	}
 
+	/*
+	 * This function return will list of liked note
+	 *
+	 * @return List, List of liked notes
+	 */
 	public List<Note> getAllLikedNotes() {
-		List<Note> likedNotes=noteRepository.findAll();
-		return likedNotes.stream().filter(note->note.getLikes()>0).toList();
+		List<Note> likedNotes = noteRepository.findAll();
+		return likedNotes.stream().filter(note -> note.getLikes() > 0).toList();
 	}
 
 }
