@@ -21,10 +21,16 @@ public interface NoteService {
 	Long countTotalNotes();
 
 	List<Note> findBySubject(String subject);
-	
+
 	Note likeNoteById(Long Id);
+
+	Note unlikeNoteById(Long id);
+
+	List<Note> getAllLikedNotes();
 	
-    Note unlikeNoteById(Long id);
-    
-    List<Note> getAllLikedNotes();
+	List<Note> getTopLikedNotes();
+	
+	Note resetLikes(Long id);
+	
+	Note likeBoost(Long id, int boost);
 }

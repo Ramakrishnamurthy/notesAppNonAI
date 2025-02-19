@@ -3,12 +3,13 @@ package com.java.noteApp.service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.java.noteApp.exception.ResourceNotFoundException;
 import com.java.noteApp.model.Note;
@@ -176,6 +177,54 @@ public class NoteServiceImpl implements NoteService {
 	public List<Note> getAllLikedNotes() {
 		List<Note> likedNotes = noteRepository.findAll();
 		return likedNotes.stream().filter(note -> note.getLikes() > 0).toList();
+	}
+
+	/*
+	 * This function return will list of liked note
+	 *
+	 * @return List, List of liked notes
+	 */
+	@Override
+	public List<Note> getTopLikedNotes() {
+		return noteRepository.findAll().stream().sorted((n1, n2) -> n2.getLikes() - n1.getLikes()).limit(5)
+				.collect(Collectors.toList());
+
+	}
+
+	/*
+	 * This function return will reset liked note to zero
+	 * 
+	 * @param Long , Notes id
+	 * 
+	 * @return note , with reset likes
+	 */
+	@Override
+	public Note resetLikes(Long id) {
+		Optional<Note> existingNote = noteRepository.findById(id);
+		Note note = null;
+		if (existingNote.isPresent()) {
+			note = existingNote.get();
+			note.setLikes(0);
+			noteRepository.save(note);
+		}
+		return note;
+	}
+
+	/*
+	 * This function return will boost likes note
+	 * 
+	 * @param Long , Notes id
+	 * 
+	 * @param int , boost
+	 * 
+	 * @return note , with increased likes
+	 */
+	@Override
+	public Note likeBoost(Long id, int boost) {
+		Note note = noteRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("No note exist with the given id :" + id));
+		note.setLikes(note.getLikes() + boost);
+		return noteRepository.save(note);
 	}
 
 }

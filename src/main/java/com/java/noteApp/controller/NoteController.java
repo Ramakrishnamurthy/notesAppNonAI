@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.noteApp.model.Note;
-import com.java.noteApp.repository.NoteRepository;
 import com.java.noteApp.service.NoteService;
 
 /*
@@ -103,5 +102,24 @@ public class NoteController {
 	@GetMapping("/api/notes/like")
 	public List<Note> getListOfLikedNotes() {
 		return noteService.getAllLikedNotes();
+	}
+	
+	/* Handler method for get list of top liked notes */
+	@GetMapping("/api/notes/top-liked")
+	public List<Note> getTopLikedNotes() {
+		return noteService.getTopLikedNotes();
+	}
+	
+	/* Handler method for reset likes for notes */
+	@DeleteMapping("/api/notes/{id}/like-reset")
+	public ResponseEntity<Note> resetLikes(@PathVariable Long id){
+		Note note= noteService.resetLikes(id);
+		return new ResponseEntity<Note>(note, HttpStatus.OK);
+	}
+	
+	/* Handler method for boost likes for notes */
+	@PostMapping("/api/notes/{id}/like-boost")
+	public ResponseEntity<Note> likeBoost(@PathVariable Long id, @RequestParam int boost){
+		return new ResponseEntity<>(noteService.likeBoost(id, boost),HttpStatus.OK);
 	}
 }
