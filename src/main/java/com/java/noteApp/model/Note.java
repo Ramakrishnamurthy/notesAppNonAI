@@ -42,13 +42,15 @@ public class Note {
 		super();
 	}
 
-	public Note(Long noteId, String subject, String description, String timestampCreated, String timestampUpdated) {
+	public Note(Long noteId, String subject, String description, String timestampCreated, String timestampUpdated,
+			int likes) {
 		super();
 		this.noteId = noteId;
 		this.subject = subject;
 		this.description = description;
 		this.timestampCreated = timestampCreated;
 		this.timestampUpdated = timestampUpdated;
+		this.likes = likes;
 	}
 
 	public Long getNoteId() {
