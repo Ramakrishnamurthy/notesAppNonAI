@@ -226,7 +226,7 @@ public class NoteServiceTest {
 
 	}
 
-	/* Handles test case for reseting  likes on note */
+	/* Handles test case for reseting likes on note */
 	@Test
 	public void resetLikesTest() {
 		Long id = 1L;
@@ -243,7 +243,7 @@ public class NoteServiceTest {
 
 	}
 
-	/* Handles test case for boosting  likes on note */
+	/* Handles test case for boosting likes on note */
 	@Test
 	public void likeBoostTest() {
 		Long id = 1L;
@@ -278,14 +278,14 @@ public class NoteServiceTest {
 
 		when(noteRepository.findAll()).thenReturn(notes);
 		List<Note> result = noteServiceImpl.getTopLikedNotes();
-		
+
 		assertNotNull(result);
-        assertEquals(5, result.size());
-        assertEquals(15, result.get(0).getLikes()); 
-        assertEquals(12, result.get(1).getLikes()); 
-        assertEquals(10, result.get(2).getLikes());
-        assertEquals(8, result.get(3).getLikes());
-        assertEquals(5, result.get(4).getLikes());
-        verify(noteRepository, times(1)).findAll(); 
+		assertEquals(5, result.size());
+		assertEquals(15, result.get(0).getLikes());
+		assertEquals(12, result.get(1).getLikes());
+		assertEquals(10, result.get(2).getLikes());
+		assertEquals(8, result.get(3).getLikes());
+		assertEquals(5, result.get(4).getLikes());
+		verify(noteRepository, times(1)).findAll();
 	}
 }
