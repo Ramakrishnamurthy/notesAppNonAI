@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 	 * @ExceptionHandler annotation is used to handle ResourceNotFoundException
 	 */
 	@ExceptionHandler
-	private ResponseEntity<ApiResponse> handlerResourceNotFoundException(ResourceNotFoundException ex) {
+	public ResponseEntity<ApiResponse> handlerResourceNotFoundException(ResourceNotFoundException ex) {
 		String message = ex.getMessage();
 		ApiResponse response = new ApiResponse();
 		response.setMessage(message);
