@@ -34,4 +34,13 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ApiResponse>(response, HttpStatus.NOT_FOUND); // Response with HTTP 404 status
 	}
 
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ApiResponse> handleException(Exception e) {
+		String errorMessage =  e.getMessage();
+		ApiResponse response = new ApiResponse();
+		response.setMessage(errorMessage);
+		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<ApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }
