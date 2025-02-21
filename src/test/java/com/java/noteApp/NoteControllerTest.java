@@ -28,6 +28,12 @@ import com.java.noteApp.controller.NoteController;
 import com.java.noteApp.model.Note;
 import com.java.noteApp.service.NoteServiceImpl;
 
+/*
+ * This is NoteControllerTest contain test cases;
+ * 
+ * @author Shilpi
+ * @since 2025-02-18
+ */
 
 @WebMvcTest(NoteController.class)
 public class NoteControllerTest {
@@ -56,7 +62,7 @@ public class NoteControllerTest {
     public void testAddNote() throws Exception {
         when(noteServiceImpl.addNote(any(Note.class))).thenReturn(note);
         
-        mockMvc.perform(post("/notes")
+        mockMvc.perform(post("/api/notes")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"subject\":\"Test Subject\",\"content\":\"Test Content\"}"))
                 .andExpect(status().isCreated())
@@ -69,7 +75,7 @@ public class NoteControllerTest {
     public void testGetNoteById() throws Exception {
         when(noteServiceImpl.getNoteById(1L)).thenReturn(note);
 
-        mockMvc.perform(get("/notes/{id}", 1L))
+        mockMvc.perform(get("/api/notes/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.subject").value("Test Subject"))
                 .andExpect(jsonPath("$.description").value("Test Content"));
@@ -80,7 +86,7 @@ public class NoteControllerTest {
     public void testGetTotalNoteCount() throws Exception {
         when(noteServiceImpl.countTotalNotes()).thenReturn(10L);
 
-        mockMvc.perform(get("/notes/count"))
+        mockMvc.perform(get("/api/notes/count"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(String.valueOf("10")));
 
@@ -93,7 +99,7 @@ public class NoteControllerTest {
     public void testDeleteNote() throws Exception {
         doNothing().when(noteServiceImpl).deleteNote(1L);
 
-        mockMvc.perform(delete("/notes/{id}", 1L))
+        mockMvc.perform(delete("/api/notes/{id}", 1L))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Delete the with given id 1"));
     }
@@ -104,7 +110,7 @@ public class NoteControllerTest {
     public void testSearchNoteBySubject() throws Exception {
         when(noteServiceImpl.findBySubject("Test")).thenReturn(List.of(note));
 
-        mockMvc.perform(get("/notes/search")
+        mockMvc.perform(get("/api/notes/search")
                 .param("subject", "Test"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].subject").value("Test Subject"))
@@ -140,6 +146,7 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$.description").value("Test Content"));
     }
 
+ // Test case for unliking a note
     @Test
     void testUnlikeNoteById() throws Exception {
         Note note = new Note();
@@ -155,6 +162,7 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$.likes").value(0));
     }
 
+    // Test case for fetching list of liked notes
     @Test
     void testGetListOfLikedNotes() throws Exception {
         Note note1 = new Note();
@@ -178,6 +186,8 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$[0].subject").value("Liked Subject1"))
                 .andExpect(jsonPath("$[1].subject").value("Liked Subject2"));
     }
+    
+    // Test case for fetching list of top liked notes
     @Test
     void testGetTopLikedNotes() throws Exception {
         Note note1 = new Note(1L, "Top Liked Subject1", "Top Liked Content1",null,null, 10);
@@ -192,6 +202,7 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$[0].subject").value("Top Liked Subject1"))
                 .andExpect(jsonPath("$[1].subject").value("Top Liked Subject2"));
     }
+ // Test case for reseting likes on notes
     @Test
     void testResetLikes() throws Exception {
         Note note = new Note(1L, "Test Subject", "Test Content",null,null, 0);
@@ -203,6 +214,7 @@ public class NoteControllerTest {
                 .andExpect(jsonPath("$.likes").value(0));
     }
     
+ // Test case for boosting likes on notes
     @Test
     void testLikeBoost() throws Exception {
         Note note = new Note(1L, "Test Subject", "Test Content",null,null, 5);

@@ -13,6 +13,9 @@ import lombok.Setter;
 /* 
  * The Notes model class represents subject , description, created and updated time stamps
  * This provides functionality about notes retrieval and modification  using getter and setter methods.
+ * 
+ * @author Shilpi
+ * @since 2025-02-18
  */
 @Entity
 public class Note {
@@ -37,7 +40,6 @@ public class Note {
 	@Column(name = "likes")
 	private int likes;
 
-	// private boolean likes;
 	public Note() {
 		super();
 	}

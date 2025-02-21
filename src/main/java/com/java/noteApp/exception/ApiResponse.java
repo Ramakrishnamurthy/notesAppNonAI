@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 public class ApiResponse {
 	private String message;
 	private HttpStatus status;
-	// private boolean success;
 
 	public ApiResponse() {
 		super();
@@ -23,7 +22,6 @@ public class ApiResponse {
 		super();
 		this.message = message;
 		this.status = status;
-		// this.success = success;
 	}
 
 	public final String getMessage() {

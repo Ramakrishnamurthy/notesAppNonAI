@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /*
  * @ControllerAdvice annotation is used to handle exceptions globally
+ * 
+ * @author Shilpi
+ * @since 2025-02-18
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {

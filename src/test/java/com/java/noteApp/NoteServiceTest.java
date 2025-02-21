@@ -24,7 +24,7 @@ import com.java.noteApp.repository.NoteRepository;
 import com.java.noteApp.service.NoteServiceImpl;
 
 /*
- * This is NoteServiceTest represents;
+ * This is NoteServiceTest contain test cases;
  * 
  * @author Shilpi
  * @since 2025-02-18
@@ -39,6 +39,7 @@ public class NoteServiceTest {
 	@InjectMocks
 	private NoteServiceImpl noteServiceImpl;
 
+	/* Handles test case for addNote */
 	@Test
 	public void addNoteTest() {
 		Note note = new Note();
@@ -56,6 +57,7 @@ public class NoteServiceTest {
 
 	}
 
+	/* Handles test case for modify a Note */
 	@Test
 	public void modifyNoteTest() {
 		Long id = 1L;
@@ -80,6 +82,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).save(note);
 	}
 
+	/* Handles test case for fetching a note by id */
 	@Test
 	public void getNoteByIdTest() {
 		Long noteId = 1L;
@@ -96,6 +99,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).findById(noteId);
 	}
 
+	/* Handles test case for deleting a note by id */
 	@Test
 	public void deleteNoteTest() {
 		Long id = 1L;
@@ -106,6 +110,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).deleteById(id);
 	}
 
+	/* Handles test case for counting total notes */
 	@Test
 	public void countTotalNotesTest() {
 		when(noteRepository.count()).thenReturn(10L);
@@ -113,6 +118,7 @@ public class NoteServiceTest {
 		assertEquals(10, totalNotes);
 	}
 
+	/* Handles test case for counting total word count in a note */
 	@Test
 	public void totalWordCountOfSpecificNoteTest() {
 		Long id = 1L;
@@ -127,6 +133,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).findById(id);
 	}
 
+	/* Handles test case for calculating average length note */
 	@Test
 	public void averageLengthofAllNoteTest() {
 		Long id = 1L;
@@ -146,6 +153,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).findAll();
 	}
 
+	/* Handles test case for fetching note by subject */
 	@Test
 	public void findBySubjectTest() {
 		Long id = 1L;
@@ -161,6 +169,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).findBySubject("Note Subject");
 	}
 
+	/* Handles test case for liking note by id */
 	@Test
 	public void likeNoteByIdTest() {
 		Long id = 1L;
@@ -178,6 +187,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).save(note);
 	}
 
+	/* Handles test case for un-liking note by id */
 	@Test
 	public void unlikeNoteByIdTest() {
 		Long id = 1L;
@@ -195,6 +205,7 @@ public class NoteServiceTest {
 		verify(noteRepository, times(1)).save(note);
 	}
 
+	/* Handles test case for fetching all liked notes */
 	@Test
 	public void getAllLikedNotes() {
 		Long id = 1L;
@@ -215,6 +226,7 @@ public class NoteServiceTest {
 
 	}
 
+	/* Handles test case for reseting  likes on note */
 	@Test
 	public void resetLikesTest() {
 		Long id = 1L;
@@ -231,6 +243,7 @@ public class NoteServiceTest {
 
 	}
 
+	/* Handles test case for boosting  likes on note */
 	@Test
 	public void likeBoostTest() {
 		Long id = 1L;
@@ -251,6 +264,7 @@ public class NoteServiceTest {
 
 	}
 
+	/* Handles test case for fetching top liked notes */
 	@Test
 	public void getTopLikedNotes() {
 		Long id = 1L;
